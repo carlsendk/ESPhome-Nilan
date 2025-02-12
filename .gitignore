@@ -3,3 +3,15 @@
 # You can modify this file to suit your needs.
 /.esphome/
 /secrets.yaml
+
+# Ignore additional ESPHome build artifacts
+*.pyc
+__pycache__/
+*~
+.*.swp
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore macOS system files
+.DS_Store

@@ -7,15 +7,15 @@ external_components:
   - source: components
     components: [ nilan_cts602 ]
 wifi:
-  ssid: "iNet"
-  password: "FFFFFFFFFF"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 
 logger:
 
 mqtt:
-  broker: "192.168.1.50"
-  username: ""
-  password: ""
+  broker: !secret mqtt_broker
+  username: !secret mqtt_username
+  password: !secret mqtt_password
 
 web_server:
   port: 80
