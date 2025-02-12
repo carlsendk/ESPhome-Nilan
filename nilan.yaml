@@ -1,0 +1,35 @@
+esphome:
+  name: nilan
+  platform: ESP8266
+  board: d1_mini
+
+external_components:
+  - source: components
+    components: [ nilan_cts602 ]
+wifi:
+  ssid: "iNet"
+  password: "FFFFFFFFFF"
+
+logger:
+
+mqtt:
+  broker: "192.168.1.50"
+  username: ""
+  password: ""
+
+web_server:
+  port: 80
+
+# RS485 UART Configuration
+uart:
+  id: uart_bus
+  tx_pin: D1
+  rx_pin: D2
+  baud_rate: 19200
+  stop_bits: 1
+  parity: NONE
+
+# Load Custom Component
+nilan_cts602:
+  id: nilan_controller
+  uart_id: uart_bus
