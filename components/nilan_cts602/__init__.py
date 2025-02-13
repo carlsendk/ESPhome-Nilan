@@ -14,10 +14,11 @@ AUTO_LOAD = ["sensor", "climate"]
 # Component namespace
 CONF_NILAN_ID = "nilan_id"
 
+
 # Configuration schema
 CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(modbus_controller.ModbusController),
-}).extend(modbus_controller.MODBUS_CONTROLLER_SCHEMA)
+}).extend(modbus_controller.validate_modbus_controller_config({}))
 
 
 async def to_code(config: dict[str, Any]) -> None:

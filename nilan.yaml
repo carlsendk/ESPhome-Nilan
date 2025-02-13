@@ -23,8 +23,12 @@ web_server:
 # RS485 UART Configuration
 uart:
   id: uart_bus
-  tx_pin: GPIO1
-  rx_pin: GPIO3
+  tx_pin:
+    number: GPIO1
+    inverted: false
+  rx_pin:
+    number: GPIO3
+    inverted: false
   baud_rate: 19200
   stop_bits: 1
   parity: NONE
