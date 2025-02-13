@@ -1,24 +1,28 @@
+"""ESPHome Nilan CTS602 Component."""
+
+from typing import Any
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
+from esphome.components import modbus_controller
 from esphome.const import CONF_ID
-from esphome.components import uart
 
-DEPENDENCIES = ['uart']
-AUTO_LOAD = ['uart']
+CODEOWNERS = ["@joncarlsen"]
+DEPENDENCIES = ["modbus_controller"]
+AUTO_LOAD = ["sensor", "climate"]
 
-nilan_ns = cg.esphome_ns.namespace('nilan')
-NilanCTS602 = nilan_ns.class_('NilanCTS602', cg.Component, uart.UARTDevice)
+# Component namespace
+CONF_NILAN_ID = "nilan_id"
 
-CONFIG_SCHEMA = (
-    cv.Schema({
-        cv.GenerateID(): cv.declare_id(NilanCTS602),
-    })
-    .extend(cv.COMPONENT_SCHEMA)
-    .extend(uart.UART_DEVICE_SCHEMA)
-)
+# Configuration schema
+CONFIG_SCHEMA = cv.Schema({
+    cv.GenerateID(): cv.declare_id(modbus_controller.ModbusController),
+}).extend(modbus_controller.MODBUS_CONTROLLER_SCHEMA)
 
-async def to_code(config):
-    var = cg.new_Pvariable(config[CONF_ID])
-    await cg.register_component(var, config)
-    await uart.register_uart_device(var, config)
-    return var
+
+async def to_code(config: dict[str, Any]) -> None:
+    """Generate code for Nilan component."""
+    var = await modbus_controller.register_modbus_controller(config)
+    # Set default Modbus settings for Nilan
+    cg.add(var.set_send_wait_time(200))  # 200ms between requests
+    cg.add(var.set_update_interval(5000))  # 5s update interval

@@ -9,9 +9,23 @@
 __pycache__/
 *~
 .*.swp
+.pytest_cache/
+.ropeproject/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
 
 # Ignore VS Code settings
 .vscode/
 
 # Ignore macOS system files
 .DS_Store
+.cursorrules
+.cursor/rules/esphome.mdc
+old/topic.txt
+old/nilan_code/configuration.h
+old/nilan_code/nilan_code.ino
+.coverage
+.pre-commit-config.yaml
+.gitignore

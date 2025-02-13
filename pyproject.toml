@@ -1,0 +1,56 @@
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyx?$'
+
+[tool.ruff]
+# Base configuration
+line-length = 88
+target-version = "py39"
+
+# Exclude files and directories from analysis
+exclude = [".git", ".venv", "__pycache__", "build", "dist"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+    "YTT", # flake8-2020
+    "S",   # flake8-bandit
+    "DTZ", # flake8-datetimez
+]
+
+ignore = ["E501"] # line length violations
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Ignore unused imports in __init__ files
+"components/nilan_cts602/const.py" = [
+    "F821",
+] # Ignore undefined name errors in const.py
+
+[tool.ruff.lint.isort]
+known-first-party = ["components"]
+known-third-party = ["esphome"]
+
+[tool.mypy]
+python_version = "3.9"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unreachable = true
+strict_optional = true
+
+[[tool.mypy.overrides]]
+module = "esphome.*"
+ignore_missing_imports = true
